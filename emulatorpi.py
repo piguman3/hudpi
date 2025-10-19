@@ -56,7 +56,8 @@ def sendDisplay(screen):
         draw.text((0, 0), "\n".join(screen.display), fill="white", font=font, spacing=0)
         draw.text((screen.cursor.x * font_width, 
                    screen.cursor.y * font_height + 1), "_", fill="white", font=font, spacing=0)
-        flipped_im = draw.im.transpose(Image.FLIP_LEFT_RIGHT)
+        flipped_im = draw._image.transpose(Image.FLIP_LEFT_RIGHT)
+        draw.rectangle(((0, 0), (127, 31)), fill="white")
         draw.bitmap((0, 0), flipped_im, fill="white")
 
 class Terminal(Widget, can_focus=True):
