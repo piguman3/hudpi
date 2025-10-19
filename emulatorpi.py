@@ -28,10 +28,9 @@ from textual import events
 from textual.app import App
 from textual.widget import Widget
 
-from luma.core.interface.serial import i2c, spi, pcf8574
-from luma.core.interface.parallel import bitbang_6800
+from luma.core.interface.serial import i2c
 from luma.core.render import canvas
-from luma.oled.device import ssd1306, ssd1309, ssd1325, ssd1331, sh1106, sh1107, ws0010
+from luma.oled.device import ssd1306
 from PIL import ImageFont, ImageOps
 
 font = ImageFont.load("tom-thumb.pil")
@@ -174,4 +173,3 @@ class TerminalEmulator(App):
 if __name__ == "__main__":
     app = TerminalEmulator(32, 5)
     app.run()
-    ser.close()
