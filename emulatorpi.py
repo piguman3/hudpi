@@ -20,7 +20,6 @@ import pty
 import shlex
 import struct
 import termios
-import time
 
 import pyte
 from rich.text import Text
