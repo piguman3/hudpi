@@ -20,7 +20,6 @@ import pty
 import shlex
 import struct
 import termios
-import serial
 import time
 
 import pyte
@@ -29,8 +28,19 @@ from textual import events
 from textual.app import App
 from textual.widget import Widget
 
-ser = serial.Serial('/dev/ttyUSB0', 19200, timeout=0)
-time.sleep(2) # Wait for arduino to start
+from luma.core.interface.serial import i2c, spi, pcf8574
+from luma.core.interface.parallel import bitbang_6800
+from luma.core.render import canvas
+from luma.oled.device import ssd1306, ssd1309, ssd1325, ssd1331, sh1106, sh1107, ws0010
+from PIL import ImageFont
+
+font = ImageFont.load("tom-thumb.pil")
+
+# rev.1 users set port=0
+serial = i2c(port=1, address=0x3C)
+
+device = ssd1306(serial)
+
 
 class PyteDisplay:
     def __init__(self, lines):
@@ -39,9 +49,14 @@ class PyteDisplay:
     def __rich_console__(self, console, options):
         yield from self.lines
 
+font_width = 4
+font_height = 6
+
 def sendDisplay(screen):
-    ser.write(bytes([screen.cursor.x, screen.cursor.y]))
-    ser.write(bytearray("\n".join(screen.display) + "\n" + "\t", "utf-8"))
+    with canvas(device) as draw:
+        draw.text((0, 0), "\n".join(screen.display), fill="white", font=font, spacing=0)
+        draw.text((screen.cursor.x * font_width, 
+                   screen.cursor.y * font_height + 1), "_", fill="white", font=font, spacing=0)
 
 class Terminal(Widget, can_focus=True):
     def __init__(self, send_queue, recv_queue, ncol, nrow):
