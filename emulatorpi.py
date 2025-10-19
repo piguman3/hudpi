@@ -39,7 +39,7 @@ font = ImageFont.load("tom-thumb.pil")
 # rev.1 users set port=0
 serial = i2c(port=1, address=0x3C)
 
-device = ssd1306(serial)
+device = ssd1306(serial, height=32)
 
 
 class PyteDisplay:
