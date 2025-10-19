@@ -56,7 +56,7 @@ def sendDisplay(screen):
         draw.text((0, 0), "\n".join(screen.display), fill="white", font=font, spacing=0)
         draw.text((screen.cursor.x * font_width, 
                    screen.cursor.y * font_height + 1), "_", fill="white", font=font, spacing=0)
-        draw.image.transpose(method=Image.Transpose.FLIP_LEFT_RIGHT)
+        draw = draw.transpose(Image.FLIP_LEFT_RIGHT)
 
 class Terminal(Widget, can_focus=True):
     def __init__(self, send_queue, recv_queue, ncol, nrow):
@@ -167,7 +167,6 @@ class TerminalEmulator(App):
                 await self.send_queue.put(["disconnect", 1])
             else:
                 await self.send_queue.put(["stdout", self.data_or_disconnect])
-                time.sleep(0.1) # Used to prevent arduino from glitching out
 
 
 if __name__ == "__main__":
