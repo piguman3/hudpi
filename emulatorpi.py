@@ -32,7 +32,7 @@ from luma.core.interface.serial import i2c, spi, pcf8574
 from luma.core.interface.parallel import bitbang_6800
 from luma.core.render import canvas
 from luma.oled.device import ssd1306, ssd1309, ssd1325, ssd1331, sh1106, sh1107, ws0010
-from PIL import ImageFont
+from PIL import ImageFont, ImageOps
 
 font = ImageFont.load("tom-thumb.pil")
 
@@ -57,6 +57,7 @@ def sendDisplay(screen):
         draw.text((0, 0), "\n".join(screen.display), fill="white", font=font, spacing=0)
         draw.text((screen.cursor.x * font_width, 
                    screen.cursor.y * font_height + 1), "_", fill="white", font=font, spacing=0)
+        ImageOps.mirror(draw)
 
 class Terminal(Widget, can_focus=True):
     def __init__(self, send_queue, recv_queue, ncol, nrow):
