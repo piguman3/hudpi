@@ -31,7 +31,7 @@ from textual.widget import Widget
 from luma.core.interface.serial import i2c
 from luma.core.render import canvas
 from luma.oled.device import ssd1306
-from PIL import ImageFont, 
+from PIL import ImageFont, Image
 
 font = ImageFont.load("tom-thumb.pil")
 
