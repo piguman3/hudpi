@@ -6,6 +6,7 @@ import threading
 import time
 import keyboard
 import mouse
+import sys
 
 from luma.core.interface.serial import i2c
 from luma.core.render import canvas
@@ -28,7 +29,7 @@ def on_mouse_event(event):
     print(event)
 
 def process():
-    with EasyProcess(["chocolate-doom", "-iwad", "/home/pigu/.config/gzdoom/DOOM2.WAD", "-1"]) as proc:
+    with EasyProcess([sys.argv[1:]]) as proc:
         proc.wait()
 
 def capture():
