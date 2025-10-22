@@ -32,6 +32,8 @@ from luma.core.render import canvas
 from luma.oled.device import ssd1306
 from PIL import ImageFont, Image
 
+import sys
+
 font = ImageFont.load("tom-thumb.pil")
 
 # rev.1 users set port=0
@@ -168,6 +170,7 @@ class TerminalEmulator(App):
                 await self.send_queue.put(["disconnect", 1])
             else:
                 await self.send_queue.put(["stdout", self.data_or_disconnect])
+        sys.exit()
 
 
 if __name__ == "__main__":
