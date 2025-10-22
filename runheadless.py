@@ -28,8 +28,10 @@ def on_keyboard_action(event):
 def on_mouse_event(event):
     print(event)
 
+print(sys.argv[1:])
+
 def process():
-    with EasyProcess([sys.argv[1:]]) as proc:
+    with EasyProcess(sys.argv[1:]) as proc:
         proc.wait()
 
 def capture():
