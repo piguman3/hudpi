@@ -41,6 +41,7 @@ def capture():
         with canvas(device, dither=True) as draw:
             flipped_im = img.transpose(Image.FLIP_LEFT_RIGHT)
             draw._image.paste(flipped_im)
+        time.sleep(0.033)
 
 disp = SmartDisplay(backend="xvfb", use_xauth=True, extra_args=[":99"], size=(320, 200))
 disp.start()
