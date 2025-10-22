@@ -168,7 +168,6 @@ class TerminalEmulator(App):
             self.event.clear()
             if self.data_or_disconnect is None:
                 await self.send_queue.put(["disconnect", 1])
-                sys.exit()
             else:
                 await self.send_queue.put(["stdout", self.data_or_disconnect])
 
