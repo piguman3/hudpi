@@ -38,7 +38,7 @@ def capture():
     while 1:
         img = ImageGrab.grab(xdisplay=":99")
         img = img.resize((128, 32), Image.Resampling.BICUBIC)
-        with canvas(device) as draw:
+        with canvas(device, dither=True) as draw:
             flipped_im = img.transpose(Image.FLIP_LEFT_RIGHT)
             draw.bitmap((0, 0), flipped_im, fill="white")
 
