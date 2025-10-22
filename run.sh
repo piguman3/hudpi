@@ -1,5 +1,4 @@
 #!/bin/bash
 
-exit
-$*
+exec $*
 python emulatorpi.py
