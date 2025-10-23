@@ -55,11 +55,10 @@ lockfilepath = ".oledlock"
 def check_pid(pid):
     try:
         os.kill(pid, 0)
-    except OSError:
+    except:
         return False
     else:
         return True
-
 
 def sendDisplay(screen):
     if os.path.isfile(lockfilepath):
@@ -70,7 +69,6 @@ def sendDisplay(screen):
         if check_pid(pid):
             return
         else:
-            sys.exit()
             os.remove(lockfilepath)
             device.show()
 
