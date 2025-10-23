@@ -69,6 +69,7 @@ def sendDisplay(screen):
         if check_pid(pid):
             return
         else:
+            sys.exit()
             os.remove(lockfilepath)
             device.show()
 
