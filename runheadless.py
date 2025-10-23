@@ -41,7 +41,7 @@ def process():
 
 def capture(disp):
     while 1:
-        img = disp.grab()
+        img = disp.waitgrab()
         img = img.resize((128, 32), Image.Resampling.BICUBIC)
         with canvas(device, dither=True) as draw:
             flipped_im = img.transpose(Image.FLIP_LEFT_RIGHT)
