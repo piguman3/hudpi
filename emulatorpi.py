@@ -66,7 +66,7 @@ def check_pid(pid):
 def sendDisplay(screen):
     if os.path.isfile(lockfilepath):
         file = open(lockfilepath, "r")
-        pid = int(lockfilepath.read())
+        pid = int(file.read())
         if check_pid(pid):
             file.close()
             return
