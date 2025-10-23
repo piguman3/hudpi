@@ -39,9 +39,9 @@ def process():
     with EasyProcess(sys.argv[1:]) as proc:
         proc.wait()
 
-def capture():
+def capture(disp):
     while 1:
-        img = ImageGrab.grab(xdisplay=":99")
+        img = disp.grab()
         img = img.resize((128, 32), Image.Resampling.BICUBIC)
         with canvas(device, dither=True) as draw:
             flipped_im = img.transpose(Image.FLIP_LEFT_RIGHT)
@@ -51,7 +51,7 @@ def capture():
             draw._image.paste(flipped_im)
         time.sleep(0.033)
 
-disp = SmartDisplay(backend="xvfb", use_xauth=True, extra_args=[":99"], size=(320, 200))
+disp = SmartDisplay(backend="xvfb", use_xauth=True, extra_args=[":99"], size=(800, 600))
 disp.start()
 
 keyboard.hook(on_keyboard_action)
@@ -59,4 +59,4 @@ keyboard.hook(on_keyboard_action)
 
 import pyautogui
 threading.Thread(target=process).start()
-threading.Thread(target=capture).start()
+threading.Thread(target=capture, args=(disp,)).start()
