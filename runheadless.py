@@ -17,7 +17,7 @@ import os
 with open("/tmp/.oledlock", "w") as file:
     file.write(str(os.getpid()))
     file.close()
-    os.chmod("/tmp/.oledlock", 0o666) 
+    os.chmod("/tmp/.oledlock", 0o777) 
 
 serial = i2c(port=1, address=0x3C)
 
