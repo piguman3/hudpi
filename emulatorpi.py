@@ -31,6 +31,7 @@ from luma.core.interface.serial import i2c
 from luma.core.render import canvas
 from luma.oled.device import ssd1306
 from PIL import ImageFont, Image
+import psutil
 
 import sys
 
@@ -52,21 +53,13 @@ font_height = 6
 
 lockfilepath = ".oledlock"
 
-def check_pid(pid):
-    try:
-        os.kill(pid, 0)
-    except:
-        return False
-    else:
-        return True
-
 def sendDisplay(screen):
     if os.path.isfile(lockfilepath):
         time.sleep(1)
         file = open(lockfilepath, "r")
         pid = int(file.read())
         file.close()
-        if check_pid(pid):
+        if psutil.pid_exists(pid):
             return
         else:
             os.remove(lockfilepath)
