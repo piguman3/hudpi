@@ -62,7 +62,6 @@ def sendDisplay(screen):
             return
         else:
             os.remove(lockfilepath)
-            device.show()
 
     with canvas(device) as draw:
         draw.text((0, 0), "\n".join(screen.display), fill="white", font=font, spacing=0)
