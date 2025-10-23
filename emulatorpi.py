@@ -52,7 +52,30 @@ class PyteDisplay:
 font_width = 4
 font_height = 6
 
+lockfilepath = ".oledlock"
+
+def check_pid(pid):
+    try:
+        os.kill(pid, 0)
+    except OSError:
+        return False
+    else:
+        return True
+
+
 def sendDisplay(screen):
+    if os.path.isfile(lockfilepath):
+        file = open(lockfilepath, "r")
+        pid = int(lockfilepath.read())
+        if check_pid(pid):
+            file.close()
+            return
+        else:
+            file.close()
+            file = open(lockfilepath, "w")
+            file.write("0")
+            file.close()
+
     with canvas(device) as draw:
         draw.text((0, 0), "\n".join(screen.display), fill="white", font=font, spacing=0)
         draw.text((screen.cursor.x * font_width, 

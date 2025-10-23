@@ -11,9 +11,13 @@ import sys
 from luma.core.interface.serial import i2c
 from luma.core.render import canvas
 from luma.oled.device import ssd1306
-from PIL import Image
+import os
 
 # rev.1 users set port=0
+with open(".oledlock", "w") as file:
+    file.write(str(os.getpid()))
+    file.close()
+
 serial = i2c(port=1, address=0x3C)
 
 device = ssd1306(serial, height=32)
