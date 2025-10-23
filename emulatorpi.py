@@ -61,7 +61,10 @@ def sendDisplay(screen):
         if psutil.pid_exists(pid):
             return
         else:
-            os.remove(lockfilepath)
+            try:
+                os.remove(lockfilepath)
+            except:
+                pass
 
     with canvas(device) as draw:
         draw.text((0, 0), "\n".join(screen.display), fill="white", font=font, spacing=0)
