@@ -47,6 +47,7 @@ def capture():
             flipped_im = img.transpose(Image.FLIP_LEFT_RIGHT)
             flipped_im = flipped_im.convert("L")
             flipped_im = flipped_im.filter(ImageFilter.FIND_EDGES)
+            flipped_im = flipped_im.convert("RGBA")
             draw._image.paste(flipped_im)
         time.sleep(0.033)
 
