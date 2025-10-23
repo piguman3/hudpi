@@ -1,6 +1,6 @@
 from easyprocess import EasyProcess
 from pyvirtualdisplay.smartdisplay import SmartDisplay
-from PIL import Image, ImageGrab
+from PIL import Image, ImageGrab, ImageFilter
 import random
 import threading
 import time
@@ -45,6 +45,8 @@ def capture():
         img = img.resize((128, 32), Image.Resampling.BICUBIC)
         with canvas(device, dither=True) as draw:
             flipped_im = img.transpose(Image.FLIP_LEFT_RIGHT)
+            flipped_im = flipped_im.convert("L")
+            flipped_im = flipped_im.filter(ImageFilter.FIND_EDGES)
             draw._image.paste(flipped_im)
         time.sleep(0.033)
 
