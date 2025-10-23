@@ -40,7 +40,6 @@ font = ImageFont.load("tom-thumb.pil")
 serial = i2c(port=1, address=0x3C)
 device = ssd1306(serial, height=32)
 
-
 class PyteDisplay:
     def __init__(self, lines):
         self.lines = lines
@@ -71,6 +70,7 @@ def sendDisplay(screen):
             return
         else:
             os.remove(lockfilepath)
+            device.show()
 
     with canvas(device) as draw:
         draw.text((0, 0), "\n".join(screen.display), fill="white", font=font, spacing=0)
