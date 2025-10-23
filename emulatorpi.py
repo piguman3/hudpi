@@ -71,9 +71,6 @@ def sendDisplay(screen):
             return
         else:
             os.remove(lockfilepath)
-            # reinit screen
-            serial = i2c(port=1, address=0x3C)
-            device = ssd1306(serial, height=32)
 
     with canvas(device) as draw:
         draw.text((0, 0), "\n".join(screen.display), fill="white", font=font, spacing=0)
