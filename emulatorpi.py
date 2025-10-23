@@ -67,14 +67,11 @@ def sendDisplay(screen):
     if os.path.isfile(lockfilepath):
         file = open(lockfilepath, "r")
         pid = int(file.read())
+        file.close()
         if check_pid(pid):
-            file.close()
             return
         else:
-            file.close()
-            file = open(lockfilepath, "w")
-            file.write("0")
-            file.close()
+            os.remove(lockfilepath)
 
     with canvas(device) as draw:
         draw.text((0, 0), "\n".join(screen.display), fill="white", font=font, spacing=0)
