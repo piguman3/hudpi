@@ -51,7 +51,7 @@ class PyteDisplay:
 font_width = 4
 font_height = 6
 
-lockfilepath = ".oledlock"
+lockfilepath = "/tmp/.oledlock"
 
 def sendDisplay(screen):
     if os.path.isfile(lockfilepath):
